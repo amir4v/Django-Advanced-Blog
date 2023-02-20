@@ -1,13 +1,12 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter, SimpleRouter
+from rest_framework.routers import SimpleRouter
 from . import views
 
 
-app_name = 'api-v1'
+app_name = "api-v1"
 
 router = SimpleRouter()
-router.register('posts', views.PostViewSet, basename='post')
-router.register('categories', views.CategoryModelViewSet, basename='category')
+router.register("post", views.PostViewSet, basename="post")
+router.register("category", views.CategoryModelViewSet, basename="category")
 
 urlpatterns = [
     # path('post/', views.post_list, name='post-list'),

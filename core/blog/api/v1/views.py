@@ -1,15 +1,10 @@
-from django.shortcuts import get_object_or_404
-from django.views.generic.base import View
-from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes, action
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView, CreateAPIView, ListAPIView, RetrieveAPIView, ListCreateAPIView, UpdateAPIView, DestroyAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework import mixins
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
+
 # from blog.models import Post
 from .serializers import PostSerializer, CategorySerializer
 from .permissions import IsOwnerOrReadOnly
@@ -23,15 +18,18 @@ class PostViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = {
-        'title': ['exact'], 'category': ['exact', 'in'], 'author': ['exact'], 'status': ['exact'],
+        "title": ["exact"],
+        "category": ["exact", "in"],
+        "author": ["exact"],
+        "status": ["exact"],
     }
-    search_fields = ['title', 'content']
-    ordering_fields = ['published_dt']
+    search_fields = ["title", "content"]
+    ordering_fields = ["published_dt"]
     pagination_class = MyPaginator
-    
-    @action(methods=['get'], detail=False)
+
+    @action(methods=["get"], detail=False)
     def get_ok(self, request):
-        return Response({'detail': 'OK'})
+        return Response({"detail": "OK"})
 
 
 class CategoryModelViewSet(viewsets.ModelViewSet):
