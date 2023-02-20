@@ -14,5 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Testing
+    - name: Something for Test
+      run: true
+    - name: PyTest Testing
       run: pytest
