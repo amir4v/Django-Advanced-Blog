@@ -15,6 +15,7 @@ urlpatterns = [
         name="go-to-django",
     ),
     path("posts/", views.PostListView.as_view(), name="post-list"),
+    path("post/api/", views.PostListAPIView.as_view(), name="post-list-api"),
     path("post/<int:pk>/", views.PostDetailView.as_view(), name="post-detail"),
     path("post/create/", views.PostCreateView.as_view()),
     path(

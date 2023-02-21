@@ -12,6 +12,7 @@ from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     PermissionRequiredMixin,
 )
+from rest_framework.views import APIView
 from .models import Post
 from .forms import PostForm
 
@@ -64,6 +65,10 @@ class PostListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
     # def get_queryset(self):
     #     posts = Post.objects.filter()
     #     return posts
+
+
+class PostListAPIView(TemplateView):
+    template_name = 'blog/post_list_api.html'
 
 
 class PostDetailView(LoginRequiredMixin, DetailView):
