@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_yasg",
     "rest_framework.authtoken",
+    "django_celery_beat",
     "rest_framework_simplejwt",
     "mail_templated",
     "djoser",
@@ -177,3 +178,27 @@ EMAIL_HOST = "localhost"
 EMAIL_PORT = 2525
 EMAIL_HOST_USER = ""  # sender's email-id
 EMAIL_HOST_PASSWORD = ""  # password associated with above email-id
+
+# Celery
+CELERY_BROKER_URL = 'redis://localhost:6379/1'
+
+# CELERY_BEAT_SCHEDULE = {
+#     'send_email': {
+#         'task': 'accounts.tasks.send_email_task',
+#         'schedule': 3, # every 3 seconds or use crontab function
+#         'args': ...,
+#         'kwargs': ...,
+#     },
+# }
+
+# Caching
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://localhost:6379/2",
+        # "TIMEOUT": 5 * 60,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
